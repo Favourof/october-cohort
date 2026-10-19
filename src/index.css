@@ -1,0 +1,10 @@
+div {
+  /* background-color: red; */
+  border: thin solid black;
+}
+
+.cardContainer {
+  width: 40%;
+  margin: auto;
+  background-color: green;
+}
