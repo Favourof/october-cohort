@@ -1,16 +1,16 @@
-import "./Button.css"
+import "../Button.css"
 
-function Button(props) {
-    console.log(props);
+function Button({ text = "null", bg = "black", color = "white" }) {
+    // console.log(props);
 
     const styleBut = {
         padding: "10px 20px",
-        backgroundColor: props.bg,
-        color: props.color
+        backgroundColor: bg,
+        color: color
     }
     return (
         <div>
-            <button className="but" style={styleBut}>{props.text}</button>
+            <button className="but" style={styleBut}>{text}</button>
         </div>
     )
 
