@@ -1,0 +1,32 @@
+*{
+  box-sizing: border-box;
+}
+
+body{
+  background-color: #F2F3F5;
+}
+
+.list-body{
+  background-color: white;
+  width: 35%;
+  font-family:'Arial';
+  padding: 10px 20px;
+  margin: auto;
+  height: 70lvh;
+  border-radius: 16px;
+}
+#list{
+  background-color: #F0F1F2;
+}
+.button{
+  color: gray;
+}
+
+.list-task{
+  list-style-type: none;
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

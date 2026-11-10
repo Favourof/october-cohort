@@ -1,13 +1,25 @@
-import { useState } from "react"
-import Button from "../components/Button"
-import { Card } from "../components/Card"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+
+// import Button from "../components/Button"
+// import { Card } from "../components/Card"
 import appStyle from "../App.module.css"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import {
+    Card,
+    CardAction,
+    CardDescription,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card"
 
 
 export const Home = () => {
-    const [count, setCount] = useState(0)
+    const [count, setCount] = useState(1)
 
-    let counter = 0
+    // let counter = 0
 
     const handleIncrement = () => {
         setCount(count + 1)
@@ -15,77 +27,130 @@ export const Home = () => {
         console.log(count);
     }
 
-    const cardObj = {
-        img: "https://sqi.edu.ng/wp-content/uploads/2023/01/software-engineering-630x330-1.webp",
-        para: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis consequuntur optio nostrum quaerat fugit maiores officia quasi cum, enim, totam debitis soluta voluptas et distinctio possimus cumque, sapiente atque explicabo!",
-        buttonContent: "Read more"
+    // const cardObj = {
+    //     img: "https://sqi.edu.ng/wp-content/uploads/2023/01/software-engineering-630x330-1.webp",
+    //     para: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis consequuntur optio nostrum quaerat fugit maiores officia quasi cum, enim, totam debitis soluta voluptas et distinctio possimus cumque, sapiente atque explicabo!",
+    //     buttonContent: "Read more"
+    // }
+
+
+
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         console.log("Hello");
+    //     }, 1000)
+    //     return (()=> clearTimeout(timer))
+    // }, [count])
+
+    function singlePage() {
+        const navigate = useNavigate();
+
+        const getSingleProduct = (productId) => {
+            navigate(`/product/${productId}`)
+        }
+    }
+
+    const [product, setProduct] = useState([])
+
+    const [retry, setRetry] = useState('hidden');
+
+    const handleGetAllProduct = async () => {
+        try {
+            const res = await fetch('http://localhost:4000/product')
+            console.log(res);
+
+            if (res.ok) {
+                const resJson = await res.json()
+                console.log((resJson));
+                setProduct(resJson.product)
+            }
+        } catch (error) {
+            console.log(error);
+
+        }
+    }
+
+    const getSingle = async (productId) => {
+        try {
+            const res = await fetch(`http://localhost:4000/product/${productId}`)
+            const resJson = await res.json();
+            console.log(resJson.product);
+            
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+        function CardImage(image,title,description,price,id) {
+        return (
+            <Card className="relative mx-auto w-full max-w-sm pt-0">
+                <div className="absolute inset-0 z-30 aspect-video " />
+                <img
+                    src={image}
+                    alt={title}
+                    className="relative z-20 aspect-video w-full  brightness-60  "
+                />
+                <CardHeader>
+                    <CardAction>
+                        <Badge variant="secondary">${price}</Badge>
+                    </CardAction>
+                    <CardTitle>{title}</CardTitle>
+                    <CardDescription>
+                        {description}
+                    </CardDescription>
+                </CardHeader>
+                <CardFooter>
+                    <Button onClick={()=> getSingle(id)} className="w-full">See More</Button>
+                </CardFooter>
+            </Card>
+        )
     }
 
 
+    useEffect(() => {
+        handleGetAllProduct()
+        const timer = setInterval(() => {
+            console.log("Hello");
+        }, 1000)
+        return (() => clearInterval(timer))
+    }, [count])
 
 
-
-    const name = "Ayo"
-    const age = 56;
-
-    const [user, setUser] = useState({
-        name: "Bolu",
-        age: 18,
-        active: true
-    })
-    const [users, setUsers] = useState([{
-        name: "Bolu",
-        age: 19,
-        active: true
-    },
-    {
-        name: "Ayo",
-        age: 15,
-        active: false
-    },
-    {
-        name: "Kike",
-        age: 24,
-        active: true
-    },
-    {
-        name: "John",
-        age: 18,
-        active: true
-    }])
 
     return (
-        <div > <p>Use state {count}</p>
-            <p>Counter: {counter}</p>
-            <button onClick={handleIncrement}>increment</button>
-            <button>Decrement</button>
-            <div>
-                <p>{user.name}</p>
-                <p>{user.age}</p>
-                <p>{user.active ? "active" : "Not Active"}</p>
-                <p></p>
+        <div >
+            <h1 className="text-2xl text-emerald-700">Hello WOrld</h1>
+            {/* {product.length < 1 && <div>
+                <p>PRoduct not avaliable</p>
+            <div ><Button click={handleIncrement} text="Retry"  bg='green' color='purple'  /></div>
+                
+                </div>} */}
+
+            {/* <div>
+                {
+                    product.length !== -1 && product.map((item) => (
+                        <ul>
+                            <li><img src={item.image} alt="" /></li>
+                            <li>{item.title}</li>
+                            <li>{item.description}</li>
+                            <li>{item.price}</li>
+                        </ul>
+                    ))
+                }
+            </div> */}
+
+            <div style={{display:"grid", gap:"20px", gridTemplateColumns:"1fr 1fr 1fr"}}>
+                {
+                    product.length !== -1 && product.map((item)=> (
+                        <div key={item._id}>
+                        {CardImage(item.image, item.title.slice(0, 16), item.description.slice(0,50), item.price, item._id)}
+                        </div>
+                    ))
+                }
             </div>
+            
 
-            <p>Name: {name}</p>
-            <p>Age: {age}</p>
-
-            <h1 className={appStyle.header}>Hello world</h1>
-            <p className={appStyle.para}>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores quisquam dignissimos vitae voluptate recusandae optio magnam, beatae obcaecati, molestiae voluptates at accusamus sint quis consequuntur quasi placeat itaque assumenda autem.</p>
-
-            <Button text="Log in" bg='green' color='purple' />
-            <Card obj={cardObj} />
-
-            {
-                users.map((u, i) => (
-                    <ul key={i}>
-                        <li>{u.name}</li>
-                        <li>{u.age}</li>
-                        <li>{u.active ? "active" : "not Active"}</li>
-                    </ul>
-                ))
-            }
-
-            <Button text={"Submit"} />
         </div>
     )
 }

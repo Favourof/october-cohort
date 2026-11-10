@@ -74,7 +74,7 @@ function Sqi() {
                                 key={course.header} 
                                 img={course.img}
                                 header={course.header}
-                                span={course.span}
+                                span={course.span} 
                                 paras={course.paras}
                                 link={course.link}
                             />
