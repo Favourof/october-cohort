@@ -18,6 +18,7 @@ import {
 
 export const Home = () => {
     const [count, setCount] = useState(1)
+    const navigate = useNavigate()
 
     // let counter = 0
 
@@ -27,20 +28,7 @@ export const Home = () => {
         console.log(count);
     }
 
-    // const cardObj = {
-    //     img: "https://sqi.edu.ng/wp-content/uploads/2023/01/software-engineering-630x330-1.webp",
-    //     para: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis consequuntur optio nostrum quaerat fugit maiores officia quasi cum, enim, totam debitis soluta voluptas et distinctio possimus cumque, sapiente atque explicabo!",
-    //     buttonContent: "Read more"
-    // }
-
-
-
-    // useEffect(() => {
-    //     const timer = setTimeout(() => {
-    //         console.log("Hello");
-    //     }, 1000)
-    //     return (()=> clearTimeout(timer))
-    // }, [count])
+   
 
     function singlePage() {
         const navigate = useNavigate();
@@ -70,21 +58,10 @@ export const Home = () => {
         }
     }
 
-    const getSingle = async (productId) => {
-        try {
-            const res = await fetch(`http://localhost:4000/product/${productId}`)
-            const resJson = await res.json();
-            console.log(resJson.product);
-            
-
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
+    
         function CardImage(image,title,description,price,id) {
         return (
-            <Card className="relative mx-auto w-full max-w-sm pt-0">
+            <Card  className="relative mx-auto w-full max-w-sm pt-0">
                 <div className="absolute inset-0 z-30 aspect-video " />
                 <img
                     src={image}
@@ -101,7 +78,7 @@ export const Home = () => {
                     </CardDescription>
                 </CardHeader>
                 <CardFooter>
-                    <Button onClick={()=> getSingle(id)} className="w-full">See More</Button>
+                    <Button onClick={()=> navigate(`/single/${id}`)} className="w-full">See More</Button>
                 </CardFooter>
             </Card>
         )

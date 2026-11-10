@@ -1,4 +1,4 @@
-import { Sidebar } from "../components/sidebar"
+
 
 export const About = () => {
     return (
