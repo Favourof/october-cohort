@@ -1,0 +1,128 @@
+.register-page {
+  min-height: calc(100vh - 44px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  background: #f6f7f9;
+  color: #182230;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 500px;
+  padding: 40px;
+  border: 1px solid #e5e7eb;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 12px 40px rgb(24 34 48 / 6%);
+}
+
+.register-eyebrow {
+  margin-bottom: 12px;
+  color: #b94f0b;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+}
+
+.register-card h1 {
+  margin-bottom: 10px;
+  font-size: clamp(26px, 5vw, 32px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+.register-description {
+  margin-bottom: 30px;
+  color: #667085;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.register-form,
+.register-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.register-form {
+  gap: 20px;
+}
+
+.register-name-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.register-field {
+  gap: 8px;
+}
+
+.register-field label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.register-field input {
+  width: 100%;
+  min-width: 0;
+  padding: 13px 14px;
+  border: 1px solid #d0d5dd;
+  border-radius: 9px;
+  background: #fff;
+  color: #182230;
+  font: inherit;
+  font-size: 14px;
+  transition: border-color 150ms, box-shadow 150ms;
+}
+
+.register-field input::placeholder {
+  color: #7b8493;
+}
+
+.register-field input:focus-visible {
+  border-color: #d96516;
+  outline: 3px solid rgb(244 123 32 / 18%);
+  outline-offset: 1px;
+}
+
+.register-button {
+  margin-top: 6px;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 9px;
+  background: #c6550c;
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 150ms;
+}
+
+.register-button:hover {
+  background: #a84408;
+}
+
+.register-button:focus-visible {
+  outline: 3px solid #c6550c;
+  outline-offset: 4px;
+}
+
+@media (max-width: 480px) {
+  .register-page {
+    padding: 32px 16px;
+  }
+
+  .register-card {
+    padding: 28px 22px;
+  }
+
+  .register-name-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
