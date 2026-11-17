@@ -15,6 +15,7 @@ import { Logs } from "./dashboardPages/Logs"
 import { SingleLog } from "./dashboardPages/SingleLog"
 import { SingleProduct } from "./Pages/SingleProduct"
 import { Register } from "./Pages/Auth/Register"
+import { Login } from "./Pages/Auth/Login"
 
 
 
@@ -28,6 +29,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+
           <Route path="/single/:id" element={<SingleProduct />}/>
         </Route>
 

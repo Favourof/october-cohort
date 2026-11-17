@@ -1,12 +1,42 @@
 import { useForm } from 'react-hook-form'
 import './Register.css'
 
-export const Register = () => {
-  const {register, handleSubmit, formState:{errors}}=useForm()
+import { zodResolver } from '@hookform/resolvers/zod'
+import { registerSchema } from '@/Schema/auth'
+import { publicInstance } from '@/lib/axios'
+import { toast } from '@/components/ui/toast'
+import { useNavigate } from 'react-router-dom'
 
-    const onSubmit = (data)=>{
+export const Register = () => {
+  const navigate = useNavigate()
+
+  const {register, handleSubmit, formState:{errors}}=useForm({
+    resolver:zodResolver(registerSchema)
+  })
+
+    const onSubmit = async(data)=>{
       console.log(data);
       
+      try {
+        const res = await publicInstance.post("auth/register", data)
+        console.log(res);
+        
+        if (res.status == 201) {
+          console.log(res.data);
+          navigate('/login')
+          toast.add({
+                    title: res.data.status? "success" : "error",
+                    description: res.data.message,
+                    variant: res.data.status ? "default" : "destructive",
+
+          })
+          
+        }
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
 
     }
 
@@ -24,12 +54,12 @@ export const Register = () => {
           <div className="register-name-row">
             <div className="register-field">
               <label htmlFor="firstName">First name</label>
-              <input {...register("firstName", {required: "First Name is required", minLength:{value:3, message:"Firstname must be atleast 3 characters"}, maxLength:{value: 30, message: "Firstname must not be longer than 30 characters"}})} id="firstName" name="firstName" type="text" autoComplete="given-name" placeholder="First name"  />
+              <input {...register("firstName")} id="firstName" name="firstName" type="text" autoComplete="given-name" placeholder="First name"  />
               {errors.firstName && <p className='text-red-400 text-xs'>{errors.firstName.message}</p>}
             </div>
             <div className="register-field">
               <label htmlFor="lastName">Last name</label>
-              <input {...register("lastName", {required: "last Name is required", minLength:{value:3, message:"lastName must be atleast 3 characters"}, maxLength:{value: 30, message: "lastName must not be longer than 30 characters"}})}  id="lastName" name="lastName" type="text" autoComplete="family-name" placeholder="Last name"  />
+              <input {...register("lastName")}  id="lastName" name="lastName" type="text" autoComplete="family-name" placeholder="Last name"  />
               {errors.lastName && <p className='text-red-400 text-xs'>{errors.lastName.message}</p>}
             </div>  
           </div>
@@ -37,11 +67,14 @@ export const Register = () => {
           <div className="register-field">
             <label htmlFor="email">Email address</label>
             <input {...register("email")} id="email" name="email" type="email" autoComplete="email" placeholder="you@example.com"  />
+             {errors.email && <p className='text-red-400 text-xs'>{errors.email.message}</p>}
           </div>
 
           <div className="register-field">
             <label htmlFor="password">Password</label>
             <input  {...register("password")}id="password" name="password" type="password" autoComplete="new-password" placeholder="Create a password"  />
+             {errors.password && <p className='text-red-400 text-xs'>{errors.password.message}</p>}
+
           </div>
 
           <button className="register-button" type="submit">Create account</button>
