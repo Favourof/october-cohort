@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 // import Button from "../components/Button"
@@ -14,11 +14,13 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import { ThemeContext } from "@/context/ThemeContext/ThemeContext"
 
 
 export const Home = () => {
     const [count, setCount] = useState(1)
     const navigate = useNavigate()
+    const {theme, ToggleTheme} =useContext(ThemeContext) 
 
     // let counter = 0
 
@@ -98,6 +100,8 @@ export const Home = () => {
     return (
         <div >
             <h1 className="text-2xl text-emerald-700">Hello WOrld</h1>
+            <p>{theme}</p>
+            <button onClick={ToggleTheme}>toggle theme</button>
             {/* {product.length < 1 && <div>
                 <p>PRoduct not avaliable</p>
             <div ><Button click={handleIncrement} text="Retry"  bg='green' color='purple'  /></div>
