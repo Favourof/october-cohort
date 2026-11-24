@@ -99,9 +99,9 @@ export const Home = () => {
 
     return (
         <div >
-            <h1 className="text-2xl text-emerald-700">Hello WOrld</h1>
-            <p>{theme}</p>
-            <button onClick={ToggleTheme}>toggle theme</button>
+            <h1 className={`text-2xl ${theme==="light"? "text-black": "text-red-800"}`}>Hello WOrld</h1>
+            <p className="text-primary">{theme}</p>
+            <button  onClick={ToggleTheme}>toggle theme</button>
             {/* {product.length < 1 && <div>
                 <p>PRoduct not avaliable</p>
             <div ><Button click={handleIncrement} text="Retry"  bg='green' color='purple'  /></div>

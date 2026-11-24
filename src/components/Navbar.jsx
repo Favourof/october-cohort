@@ -7,7 +7,7 @@ export const Navbar = () => {
     const {theme} = useContext(ThemeContext)
     return (
         <div>
-            <ul style={{ width: "60%", backgroundColor: "black", display: "flex", justifyContent: 'space-between', borderRadius: "16px", color: "white", padding: "10px", margin: "auto", listStyleType: "none", cursor: "pointer" }}>
+            <ul className="text-primary bg-secondary" style={{ width: "60%",  display: "flex", justifyContent: 'space-between', borderRadius: "16px",padding: "10px", margin: "auto", listStyleType: "none", cursor: "pointer" }}>
                 <li><Link to={"/"}>Home</Link></li>
                 <li><Link to={"/about"}>About</Link></li>
                 <li><Link to={"/contact"}>Contact</Link></li>
